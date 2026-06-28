@@ -5,7 +5,7 @@
 [![Python](https://img.shields.io/badge/Python-3.12%20%7C%203.13%20%7C%203.14-blue.svg)]()
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-ee4c2c.svg)]()
 
-`QuantFlux-Engine` is a bare-metal runtime optimization library engineered to bypass severe VRAM constraints when executing frontier 4-billion parameter Diffusion Transformers (DiT) on consumer-grade hardware. By weaponizing dynamic python reflection, out-of-core orchestration, and asymmetric calibration quantization, this engine drops peak VRAM overhead by **24.2% (saving 2.04 GB of physical VRAM)** during inference loops with zero upstream weight modifications.
+`QuantFlux-Engine` is a bare-metal runtime optimization library engineered to bypass severe VRAM constraints when executing frontier 4-billion parameter Diffusion Transformers (DiT) on consumer-grade hardware. By weaponizing dynamic python reflection, out-of-core orchestration, and asymmetric calibration quantization, this engine drops peak VRAM overhead by **24.2% (saving 2.04 GB of physical VRAM on a 16gb VRAM consumer card)** during inference loops with zero upstream weight modifications.
 
 ---
 
