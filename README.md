@@ -1,11 +1,11 @@
 # QuantFlux-Engine
-> **An Out-of-Core Asymmetric INT8 Runtime Graph Patcher for Frontier Diffusion Transformers**
+> **An Asymmetric INT8 Runtime Module Patcher for Frontier Diffusion Transformers**
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Python](https://img.shields.io/badge/Python-3.12%20%7C%203.13%20%7C%203.14-blue.svg)]()
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-ee4c2c.svg)]()
 
-`QuantFlux-Engine` is a bare-metal runtime optimization library engineered to bypass severe VRAM constraints when executing frontier 4-billion parameter Diffusion Transformers (DiT) on consumer-grade hardware. By weaponizing dynamic python reflection, out-of-core orchestration, and asymmetric calibration quantization, this engine drops peak VRAM overhead by **24.2% (saving 2.04 GB of physical VRAM on a 16gb VRAM consumer card)** during inference loops with zero upstream weight modifications.
+`QuantFlux-Engine` is a bare-metal runtime optimization library engineered to bypass severe VRAM constraints when executing frontier 4-billion parameter Diffusion Transformers (DiT) on consumer-grade hardware. By deploying dynamic module patching, host-to-device pipeline offloading, and asymmetric quantization, this engine drops peak VRAM overhead by **24.2% (saving 2.04 GB of physical VRAM on a 16gb VRAM consumer card)** during inference loops with zero upstream weight modifications.
 
 ---
 
@@ -13,10 +13,10 @@
 
 Standard inference pipelines choke on 16GB hardware bounds due to bloated linear weight allocation and dense, un-checkpointed intermediate activation graphs. This engine enforces a strict memory-staging schedule to maximize compute efficiency:
 
-1. **Dynamic Reflection Graph-Walking:** Recursively traverses the live model execution graph at runtime, hot-swapping 109 static `nn.Linear` layers with custom `QuantizedLinear` projections utilizing asymmetric INT8 quantization.
-2. **Out-of-Core Token Orchestration:** Isolates text conditioning compute strictly to host RAM via CPU-bound T5 and CLIP text encoders, aggressively evicting them from memory before the DiT or VAE shells migrate to the hardware accelerator.
-3. **Activation Checkpointing Shells:** Deploys memory-efficient wrappers across 5 dual-stream and 20 single-stream transformer blocks to trade compute for memory, freeing up execution headroom.
-4. **Low-Precision Spatial Tiling:** Enforces low-precision `bfloat16` memory-mapped slicing and spatial tiling across the VAE decoder to prevent boundary exceptions during the final latent unfolding phase.
+1. **Dynamic Module Monkey-Patching:** Recursively traverses the live model execution graph at runtime, hot-swapping 109 static `nn.Linear` layers with custom `QuantizedLinear` projections utilizing asymmetric INT8 quantization.
+2. **Host-to-Device Pipeline Offloading:** Isolates text conditioning compute strictly to host RAM via CPU-bound T5 and CLIP text encoders, aggressively evicting them from memory before the DiT or VAE shells migrate to the hardware accelerator.
+3. **Layer-Wise Activation Checkpointing:** Deploys memory-efficient wrappers across 5 dual-stream and 20 single-stream transformer blocks to trade compute for memory, freeing up execution headroom.
+4. **Sub-Tile Latent Decoding:** Enforces low-precision `bfloat16` memory-mapped slicing and spatial tiling across the VAE decoder to prevent boundary exceptions during the final latent unfolding phase.
 
 ---
 
