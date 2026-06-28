@@ -1,0 +1,10 @@
+torch>=2.2.0
+torchvision
+diffusers>=0.29.0
+accelerate>=0.30.0
+transformers>=4.41.0
+sentencepiece
+protobuf
+pillow
+numpy
+pydantic
