@@ -29,8 +29,12 @@ Profiling benchmarks were captured on a single-GPU node cluster mapping memory c
 | **Baseline Native Pipeline** | ~8.43 GB | *Baseline* | Stable (Reference) |
 | **QuantFlux Patched Engine** | **~6.39 GB** | **-2.04 GB (24.2%)** | **Verified Stable** |
 
+![Benchmark](assets/benchmark.png)
+
 ### Verification of Convergence
 Mathematical stability was verified using a truncated 20-step Flow Matching Euler trajectory loop. The system successfully maintained absolute numerical stability without autograd scale clipping or `NaN` variance accumulation, producing the uncorrupted structural hardware asset below:
+
+![Inference](assets/inference.png)
 
 <p align="center">
   <img src="assets/output_patched.png" width="400" alt="Engine Output Verification">
