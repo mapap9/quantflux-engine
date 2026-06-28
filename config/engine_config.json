@@ -1,0 +1,33 @@
+{
+  "model": {
+    "model_id": "black-forest-labs/FLUX.2-klein-4B",
+    "dtype": "bfloat16",
+    "height": 512,
+    "width": 512
+  },
+  "optimization": {
+    "quantization": {
+      "enabled": true,
+      "target_precision": "int8",
+      "asymmetric": true,
+      "clamp_min": 1e-5,
+      "fallback_layers": ["timestep_embedder", "x_embedder"]
+    },
+    "memory_management": {
+      "out_of_core_text_encoding": true,
+      "aggressive_encoder_eviction": true,
+      "vae_slicing": true,
+      "vae_tiling": true
+    },
+    "activation_checkpointing": {
+      "enabled": true,
+      "dual_stream_blocks": 5,
+      "single_stream_blocks": 20
+    }
+  },
+  "inference": {
+    "num_inference_steps": 20,
+    "default_guidance_scale": 3.5,
+    "reproducibility_seed": 42
+  }
+}
