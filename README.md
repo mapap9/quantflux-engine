@@ -44,6 +44,7 @@ Mathematical stability was verified using a truncated 20-step Flow Matching Eule
 quantflux-engine/
 ├── assets/                  # High-fidelity output verification artifacts
 ├── benchmarks/              # Memory telemetry profiling & telemetry scripts
+│   └── production_benchmark.py  # Benchmarking and test script.
 ├── config/                  # Hyperparameter manifest & engine configurations
 ├── src/
 │   ├── layers.py            # Hardened QuantizedLinear asymmetric execution layers
